@@ -8,7 +8,7 @@ A simple and beautiful web tool that lets you upload any image and instantly see
 - Download the full source code with one click
 
 🌐 **Live Preview:**
-[Click here to try it](https://<your-username>.github.io/<your-repo-name>/)
+[Click here to try it](https://wael0dfg.github.io/Mp-checker/)
 
 ---
 
