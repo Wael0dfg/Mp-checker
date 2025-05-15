@@ -29,6 +29,7 @@
       border-radius: 12px;
       box-shadow: 0 0 10px rgba(0,0,0,0.2);
       text-align: center;
+      max-width: 500px;
     }
     input[type="file"] {
       display: none;
@@ -42,6 +43,16 @@
       font-weight: bold;
       display: inline-block;
       margin-bottom: 20px;
+    }
+    .drop-area {
+      border: 2px dashed #D4C9BE;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 15px;
+      color: #F1EFEC;
+    }
+    .drop-area.hover {
+      background-color: #0e2a47;
     }
     .result {
       margin-top: 20px;
@@ -69,6 +80,11 @@
     .link-button:hover {
       background-color: #bfb3a6;
     }
+    img.preview {
+      max-width: 100%;
+      margin-top: 15px;
+      border-radius: 8px;
+    }
   </style>
 </head>
 <body>
@@ -76,6 +92,7 @@
     <h1>Image Resolution Checker</h1>
     <label for="imageUpload" class="custom-file-upload">Choose File</label>
     <input type="file" id="imageUpload" accept="image/*" />
+    <div class="drop-area" id="dropArea">Or drag and drop an image here</div>
     <div class="result" id="result"></div>
     <div class="button-group">
       <a href="https://github.com/Wael0dfg/Mp-checker" class="link-button" target="_blank">View Source Code</a>
@@ -84,20 +101,57 @@
   </div>
 
   <script>
-    document.getElementById('imageUpload').addEventListener('change', function (event) {
-      const file = event.target.files[0];
-      if (!file) return;
+    const fileInput = document.getElementById('imageUpload');
+    const dropArea = document.getElementById('dropArea');
+    const resultDiv = document.getElementById('result');
+
+    function handleImage(file) {
+      if (!file || !file.type.startsWith('image/')) return;
       const img = new Image();
       const objectURL = URL.createObjectURL(file);
+
       img.onload = function () {
         const width = img.width;
         const height = img.height;
         const megapixels = ((width * height) / 1000000).toFixed(2);
-        document.getElementById('result').innerHTML =
-          `<strong>Width:</strong> ${width}px<br><strong>Height:</strong> ${height}px<br><strong>Resolution:</strong> ${megapixels} MP`;
+        const aspectRatio = (width / height).toFixed(2);
+        const sizeMB = (file.size / (1024 * 1024)).toFixed(2);
+
+        resultDiv.innerHTML = `
+          <strong>Width:</strong> ${width}px<br>
+          <strong>Height:</strong> ${height}px<br>
+          <strong>Resolution:</strong> ${megapixels} MP<br>
+          <strong>Aspect Ratio:</strong> ${aspectRatio}<br>
+          <strong>File Size:</strong> ${sizeMB} MB<br>
+          <img src="${objectURL}" alt="Preview" class="preview">
+        `;
+
         URL.revokeObjectURL(objectURL);
       };
+
       img.src = objectURL;
+    }
+
+    fileInput.addEventListener('change', e => {
+      handleImage(e.target.files[0]);
+    });
+
+    dropArea.addEventListener('dragover', e => {
+      e.preventDefault();
+      dropArea.classList.add('hover');
+    });
+
+    dropArea.addEventListener('dragleave', () => {
+      dropArea.classList.remove('hover');
+    });
+
+    dropArea.addEventListener('drop', e => {
+      e.preventDefault();
+      dropArea.classList.remove('hover');
+      if (e.dataTransfer.files.length > 0) {
+        fileInput.files = e.dataTransfer.files;
+        handleImage(e.dataTransfer.files[0]);
+      }
     });
   </script>
 </body>
