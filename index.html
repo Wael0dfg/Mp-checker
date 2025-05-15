@@ -85,6 +85,17 @@
       margin-top: 15px;
       border-radius: 8px;
     }
+    #madeByLink {
+  color: #123458;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+#madeByLink:hover {
+  color: #0a2040;
+  text-decoration: underline;
+}
   </style>
 </head>
 <body>
@@ -100,9 +111,9 @@
     </div>
   </div>
 
-  <p style="text-align:center; color:#123458; margin-top:15px; font-weight:600;">
-    <a href="about.html" style="color:#123458; text-decoration:none;">Made by Wael Iraten</a>
-  </p>
+  <p style="text-align:center; margin-top:15px; font-weight:600;">
+  <a id="madeByLink" href="about.html">Made by Wael Iraten</a>
+</p>
 
   <script>
     const fileInput = document.getElementById('imageUpload');
