@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About Wael Iraten</title>
+  <style>
+    body {
+      background-color: #F1EFEC;
+      color: #030303;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    .container {
+      background-color: #123458;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
+      max-width: 500px;
+      margin-top: 40px;
+    }
+    h1 {
+      color: #D4C9BE;
+      margin-bottom: 15px;
+    }
+    p {
+      color: #F1EFEC;
+      font-size: 18px;
+      line-height: 1.5;
+    }
+    .button-group {
+      margin-top: 30px;
+    }
+    .link-button {
+      text-decoration: none;
+      background-color: #D4C9BE;
+      color: #030303;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin: 5px;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+    .link-button:hover {
+      background-color: #bfb3a6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>About Me</h1>
+    <p>
+      Hello! My name is <strong>Wael Iraten</strong>, also known as <strong>Wael0dfg</strong>.<br>
+      I was born on <strong>December 21, 2011</strong> and I am <span id="age"></span> years old.
+    </p>
+    <div class="button-group">
+      <a href="https://www.instagram.com/wael0dfg/?igsh=MTV1b2V2OTN2c2RieQ==" target="_blank" class="link-button">Instagram</a>
+      <a href="index.html" class="link-button">Back to Main Page</a>
+    </div>
+  </div>
+
+  <script>
+    function calculateAge(birthDateStr) {
+      const today = new Date();
+      const birthDate = new Date(birthDateStr);
+      let age = today.getFullYear() - birthDate.getFullYear();
+      const m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      return age;
+    }
+    document.getElementById('age').textContent = calculateAge('2011-12-21');
+  </script>
+</body>
+</html>
