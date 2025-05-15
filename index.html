@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Image Resolution Checker</title>
+  <style>
+    body {
+      background-color: #F1EFEC;
+      color: #030303;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      color: #030303;
+      background-color: #D4C9BE;
+      padding: 10px 20px;
+      border-radius: 8px;
+    }
+    .container {
+      background-color: #123458;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    input[type="file"] {
+      display: none;
+    }
+    .custom-file-upload {
+      background-color: #D4C9BE;
+      color: #030303;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #F1EFEC;
+    }
+    .result strong {
+      color: #F1EFEC;
+      font-weight: bold;
+    }
+    .button-group {
+      margin-top: 30px;
+    }
+    .link-button {
+      text-decoration: none;
+      background-color: #D4C9BE;
+      color: #030303;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      margin: 5px;
+      display: inline-block;
+      transition: background-color 0.3s;
+    }
+    .link-button:hover {
+      background-color: #bfb3a6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Image Resolution Checker</h1>
+    <label for="imageUpload" class="custom-file-upload">Choose File</label>
+    <input type="file" id="imageUpload" accept="image/*" />
+    <div class="result" id="result"></div>
+    <div class="button-group">
+      <a href="https://github.com/Wael0dfg/Mp-checker" class="link-button" target="_blank">View Source Code</a>
+      <a href="https://www.instagram.com/wael0dfg/?igsh=MTV1b2V2OTN2c2RieQ==" class="link-button" target="_blank">Instagram</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('imageUpload').addEventListener('change', function (event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const img = new Image();
+      const objectURL = URL.createObjectURL(file);
+      img.onload = function () {
+        const width = img.width;
+        const height = img.height;
+        const megapixels = ((width * height) / 1000000).toFixed(2);
+        document.getElementById('result').innerHTML =
+          `<strong>Width:</strong> ${width}px<br><strong>Height:</strong> ${height}px<br><strong>Resolution:</strong> ${megapixels} MP`;
+        URL.revokeObjectURL(objectURL);
+      };
+      img.src = objectURL;
+    });
+  </script>
+</body>
+</html>
