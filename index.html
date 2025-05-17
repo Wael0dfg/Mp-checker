@@ -86,22 +86,22 @@
       border-radius: 8px;
     }
     #madeByLink {
-  color: #123458;
-  text-decoration: none;
-  font-weight: 600;
-  cursor: pointer;
-  transition: color 0.3s, text-decoration 0.3s;
-}
-#madeByLink:hover {
-  color: #0a2040;
-  text-decoration: underline;
-}
+      color: #123458;
+      text-decoration: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.3s, text-decoration 0.3s;
+    }
+    #madeByLink:hover {
+      color: #0a2040;
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Image Resolution Checker</h1>
-    <label for="imageUpload" class="custom-file-upload">Choose File</label>
+    <label for="imageUpload" class="custom-file-upload">Choose an Image</label>
     <input type="file" id="imageUpload" accept="image/*" />
     <div class="drop-area" id="dropArea">Or drag and drop an image here</div>
     <div class="result" id="result"></div>
@@ -112,8 +112,8 @@
   </div>
 
   <p style="text-align:center; margin-top:15px; font-weight:600;">
-  <a id="madeByLink" href="about.html">Made by Wael Iraten</a>
-</p>
+    <a id="madeByLink" href="about.html">Made by Wael Iraten</a>
+  </p>
 
   <script>
     const fileInput = document.getElementById('imageUpload');
